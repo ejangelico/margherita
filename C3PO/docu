@@ -1,0 +1,10 @@
+create postgresql database 'margherita'
+with permissions set up properly
+in xxx account: createdb margherita
+
+direct scripts to use that database:
+in C3PO directory: create file 'database' with 1 line 'margherita' in it
+
+direct scripts to look into *this directory
+edit file admindefs to read:
+HSpath, /home/xxx/Incom/UoC/Margherita/C3PO

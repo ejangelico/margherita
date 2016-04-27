@@ -1,0 +1,18 @@
+#alias, R/W, context, PV name, comment
+SP1, W, ssp, htr.zone1.SP.W, 
+SP1, R, rsp, htr.zone1.SP.R, 
+#
+SP2, W, ssp, htr.zone2.SP.W, 
+SP2, R, rsp, htr.zone2.SP.R, 
+#
+SP3, W, ssp, htr.zone3.SP.W, 
+SP3, R, rsp, htr.zone3.SP.R, 
+#
+SP4, W, ssp, htr.zone4.SP.W, 
+SP4, R, rsp, htr.zone4.SP.R, 
+#
+SP5, W, ssp, htr.zone5.SP.W, 
+SP5, R, rsp, htr.zone5.SP.R, 
+#
+SP6, W, ssp, htr.zone6.SP.W, 
+SP6, R, rsp, htr.zone6.SP.R, 

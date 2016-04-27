@@ -1,0 +1,18 @@
+# PV name, type R/W, interface, commpars, contr. no., parameter, zone. comment
+htr.zone1.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  
+htr.zone1.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  
+#
+htr.zone2.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  
+htr.zone2.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  
+#
+htr.zone3.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  
+htr.zone3.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  
+#
+htr.zone4.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  
+htr.zone4.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  
+#
+htr.zone5.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  
+htr.zone5.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  
+#
+htr.zone6.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  
+htr.zone6.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  

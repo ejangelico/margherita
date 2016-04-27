@@ -1,0 +1,56 @@
+python crcmod
+python socket
+
+psycopg
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04
+
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+
+sudo -i -u postgres logs into the postgres account
+
+get a postgres prompt by typing psql
+exit with \q
+
+in the postgrs account, create new users
+createuser --interactive
+Enter name of role to add: xxx
+Shall the new role be a superuser? (y/n) n
+Shall the new role be allowed to create databases? (y/n) y
+Shall the new role be allowed to create more new roles? (y/n) n
+
+
+createdb  xxx
+
+createdb  xcap
+
+in xxx:
+
+psql -d xcap
+
+in xcap database:
+CREATE TABLE actuators (
+  id serial PRIMARY KEY,
+  name varchar (32) NOT NULL,
+  interface varchar (32) NOT NULL,
+  nr_at_interface varchar(8) NOT NULL,
+  unit varchar (32) NOT NULL,
+  conversion real
+  );
+
+
+CREATE TABLE PVs (
+  id serial PRIMARY KEY,
+  PVname varchar (32) NOT NULL,
+  type varchar (32) NOT NULL,
+  Drname varchar (32) NOT NULL,
+  SecTable varchar (32) NOT NULL,
+  Side1 varchar (32),
+  Side2 varchar (32),
+  Side3 varchar (32),
+  Side4 varchar (32),
+  Tval varchar (32),
+  Aval varchar (32),
+  comment varchar (256)
+);

@@ -1,0 +1,14 @@
+# PV name, type, driver, action
+htr.zone1.SP.W, W, CN616, EXEC,  
+htr.zone1.SP.R, R, CN616, EXEC,  
+htr.zone2.SP.W, W, CN616, EXEC,  
+htr.zone2.SP.R, R, CN616, EXEC,  
+htr.zone3.SP.W, W, CN616, EXEC,  
+htr.zone3.SP.R, R, CN616, EXEC,  
+htr.zone4.SP.W, W, CN616, EXEC,  
+htr.zone4.SP.R, R, CN616, EXEC,  
+htr.zone5.SP.W, W, CN616, EXEC,  
+htr.zone5.SP.R, R, CN616, EXEC,  
+htr.zone6.SP.W, W, CN616, EXEC,  
+htr.zone6.SP.R, R, CN616, EXEC,  
+#
