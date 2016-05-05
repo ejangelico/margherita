@@ -396,3 +396,12 @@ command.
 `(3 rows)`
 
 `postgres=# `
+
+ 
+
+### Why are we not using software from RedHat?
+
+In rhel6, the default postgresql is version 8.4.  We want a newer version than
+that.  We could use the version provided by the RedHat Software Collection, but
+I didn't see a version of psycopg2 included there.  Since we need that, it was
+easier to just add the postgresql 9.4 repo and get the packages we required.
