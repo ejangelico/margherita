@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # return model number
 # usage tcmdl no arguments
@@ -33,7 +33,7 @@ cmd = "OmegaModel"
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvr.py","tcmdl.py",cmd])
+subprocess.call([cmdpath+"pvr.py","tcmdl.py",cmd], shell=True)
 #                                  ^ 
 #                                  traceback
 

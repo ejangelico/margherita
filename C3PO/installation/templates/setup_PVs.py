@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 import psycopg2
 import re

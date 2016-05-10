@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # read a temperature
 # usage rtm <SP no 1..6> <value>
@@ -35,7 +35,7 @@ TMno = "TM"+sys.argv[1]
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvr.py","rtm.py",TMno])
+subprocess.call([cmdpath+"pvr.py","rtm.py",TMno], shell=True)
 #                                  ^ 
 #                                  traceback
 

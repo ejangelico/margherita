@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # return temp. controller ID
 # usage rtcid no arguments
@@ -10,6 +10,7 @@ import subprocess
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
 
+print(sys.version)
 f = open('./userinfo','r')
 unixuser = f.readline()
 unixuser = re.sub('\n','',unixuser)

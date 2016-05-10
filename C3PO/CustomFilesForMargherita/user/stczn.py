@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # set active zones of temp controller
 # usage stczn <list of active zones>
@@ -47,7 +47,7 @@ for i in range(1,len(sys.argv)):
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvw.py","stczn.py",cmd,zonestring])
+subprocess.call([cmdpath+"pvw.py","stczn.py",cmd,zonestring], shell=True)
 #                                  ^ 
 #                                  traceback
 

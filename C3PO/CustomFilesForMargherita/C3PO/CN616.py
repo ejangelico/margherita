@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # interface to Omega CN616 temperature controller
 # Uses database table CN616
