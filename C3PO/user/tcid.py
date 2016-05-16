@@ -10,7 +10,6 @@ import subprocess
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
 
-print(sys.version)
 f = open('./userinfo','r')
 unixuser = f.readline()
 unixuser = re.sub('\n','',unixuser)
@@ -34,7 +33,7 @@ cmd = "OmegaID"
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvr.py","tcid.py",cmd])
+subprocess.call([cmdpath+"pvr.py","tcid.py",cmd] )
 #                                  ^ 
 #                                  traceback
 

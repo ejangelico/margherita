@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # read raw PV - for debugging purposes
 # usage rrpv <PV name>
@@ -36,7 +36,7 @@ pvname=sys.argv[1]
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvr.py","rrpv.py",pvname])
+subprocess.call([cmdpath+"pvr.py","rrpv.py",pvname] )
 #                                  ^ 
 #                                  traceback
 

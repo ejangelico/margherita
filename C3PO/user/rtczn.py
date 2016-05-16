@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # get active zones of temp controller
 # usage stczn 
@@ -34,7 +34,7 @@ cmd = "OmegaZones"
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvr.py","stczn.py",cmd])
+subprocess.call([cmdpath+"pvr.py","stczn.py",cmd] )
 #                                  ^ 
 #                                  traceback
 

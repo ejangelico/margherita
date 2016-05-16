@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 import psycopg2
 import re
@@ -41,6 +41,7 @@ except:
 cur.execute(Table_PVs)
 
 for line in f:
+  print "looking at line: " + line
   dbstring = "INSERT INTO pvs (pvname,type,drname,tbname,side1,side2,side3,side4,tval) VALUES ("
   line = re.sub('\n','',line)
   if re.match("^\s*\#",line) :
@@ -50,12 +51,13 @@ for line in f:
   args = ""
   for w in words:
     w=w.strip() # remove leading, trailing whitespace
-    #print "w = "+w
+    print "w = "+w
     if len(args) > 0 :
       args = args + ","
     args = args + "'"+w+"'"
+    print "args = " + args
   dbstring = dbstring + args + ")"
-  # print dbstring
+  print dbstring
   try: 
     cur.execute(dbstring)
   except:

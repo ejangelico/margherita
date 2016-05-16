@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # set-up and start autotune or stop autotune
 # usage auto <0:stop, 1: start> [<zone> <setp>] 
@@ -32,9 +32,9 @@ if len(sys.argv) <> 2 and len(sys.argv) <> 3:
   raise Exception('auto needs 1 or 2 arguments')
   
 if len(sys.argv) == 2: # just start/stop
-  subprocess.call([cmdpath+"pvw.py","auto.py","htr.autotune.run.W",sys.argv[1]])
+  subprocess.call([cmdpath+"pvw.py","auto.py","htr.autotune.run.W",sys.argv[1]] )
 if len(sys.argv) == 3: # start with parameters
-  subprocess.call([cmdpath+"pvw.py","auto.py","htr.autotune.zone.W",sys.argv[1]])
+  subprocess.call([cmdpath+"pvw.py","auto.py","htr.autotune.zone.W",sys.argv[1]] )
   subprocess.call([cmdpath+"pvw.py","auto.py","htr.autotune.setp.W",sys.argv[2]])
 #  subprocess.call([cmdpath+"pvw.py","auto.py","htr.autotune.run.W",sys.argv[1]])
 

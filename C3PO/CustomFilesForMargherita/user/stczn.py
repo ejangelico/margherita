@@ -47,7 +47,7 @@ for i in range(1,len(sys.argv)):
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvw.py","stczn.py",cmd,zonestring], shell=True)
+subprocess.call([cmdpath+"pvw.py","stczn.py",cmd,zonestring] )
 #                                  ^ 
 #                                  traceback
 

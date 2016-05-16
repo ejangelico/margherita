@@ -66,6 +66,6 @@ if len(rows) == 1:
     
     
 # call driver
-subprocess.call([cmdpath+driver+".py",'EXEC',"pvw.py",sectb,pvname,value], shell=True)
+subprocess.call([cmdpath+driver+".py",'EXEC',"pvw.py",sectb,pvname,value] )
 
 # subprocess.check_output([cmdpath+driver+".py",'EXEC',"pvr.py",sectb,pvname])

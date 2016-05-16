@@ -18,36 +18,44 @@ except: raise Exception("Can't to connect to database "+dbase)
  
 cur = conn.cursor()
 
-# alias name, context in which it is used, PV name
-Table_alias="CREATE TABLE alias ("+ \
+Table_PVs="CREATE TABLE PVs ("+ \
   "id serial PRIMARY KEY,"+ \
-  "alias varchar (32) NOT NULL,"+ \
-  "rw varchar (32) NOT NULL,"+ \
-  "context varchar (32) NOT NULL,"+ \
   "PVname varchar (32) NOT NULL,"+ \
+  "type varchar (32) NOT NULL,"+ \
+  "interface varchar (64) NOT NULL,"+ \
+  "commpars varchar (64) NOT NULL,"+ \
+  "contrno varchar (32),"+ \
+  "parameter varchar (32),"+ \
+  "zone varchar (32),"+ \
+  "intPV varchar (256),"+ \
   "comment varchar (256))"            
 
-f = open('aliasdefs','r')
+f = open('./CN616defs','r')
 try:
-  cur.execute("DROP TABLE alias")
+  cur.execute("DROP TABLE pvs")
 except:
   print ""
-cur.execute(Table_alias)
+      
+cur.execute(Table_PVs)
 
 for line in f:
-  dbstring = "INSERT INTO alias (alias,rw,context,pvname,comment) VALUES ("
+  dbstring = "INSERT INTO pvs (pvname,type,interface,commpars,contrno,\
+parameter,zone,intPV,comment) VALUES ("
   line = re.sub('\n','',line)
   if re.match("^\s*\#",line) :
+    #f.next()
     continue
   words = line.split(", ")
   args = ""
   for w in words:
     w=w.strip() # remove leading, trailing whitespace
+    #print "w = "+w
     if len(args) > 0 :
       args = args + ","
     args = args + "'"+w+"'"
   dbstring = dbstring + args + ")"
+  # print dbstring
   try: 
     cur.execute(dbstring)
   except:
-    print dbstring
+    print "Can\'t execute:\n"+dbstring

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # send a value to a setpoint
 # usage ssp <SP no 1..6> <value>
@@ -36,5 +36,5 @@ value = sys.argv[2]
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvw.py","ssp.py",SPno,value])
+subprocess.call([cmdpath+"pvw.py","ssp.py",SPno,value] )
 

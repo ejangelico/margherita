@@ -36,5 +36,5 @@ value = sys.argv[2]
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvw.py","ssp.py",SPno,value], shell=True)
+subprocess.call([cmdpath+"pvw.py","ssp.py",SPno,value] )
 

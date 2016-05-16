@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # interface to Omega CN616 temperature controller
 # Uses database table CN616
@@ -17,6 +17,7 @@ import re
 
 action   = sys.argv[1]
 callfrom = sys.argv[2] # for debugging
+
 
 if action == 'ID':
   print "CN616"

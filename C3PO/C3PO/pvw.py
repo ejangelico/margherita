@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # write to a PV
 # usage pvw <pv name> <value>
@@ -66,6 +66,6 @@ if len(rows) == 1:
     
     
 # call driver
-subprocess.call([cmdpath+driver+".py",'EXEC',"pvw.py",sectb,pvname,value])
+subprocess.call([cmdpath+driver+".py",'EXEC',"pvw.py",sectb,pvname,value] )
 
 # subprocess.check_output([cmdpath+driver+".py",'EXEC',"pvr.py",sectb,pvname])

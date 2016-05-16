@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # read a temperature
 # usage rtm <SP no 1..6> <value>

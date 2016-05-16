@@ -72,7 +72,7 @@ if len(rows) == 1:
   cmdpath = rows[0][0]
     
 # call driver
-res=subprocess.check_output([cmdpath+driver+".py",'EXEC',"pvr.py",sectb,pvname], shell=True)
+res=subprocess.check_output([cmdpath+driver+".py",'EXEC',"pvr.py",sectb,pvname] )
 
 #print(res,end="")
 print res,  # the comma prevents \n
