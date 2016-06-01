@@ -1,31 +1,46 @@
 # PV name, type R/W, interface, commpars, contr. no., parameter, zone. int. PV, comment
-htr.zone1.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  ,  
-htr.zone1.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  ,  
+htr.zone1.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  ,  #
+htr.zone1.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  ,  #
 #
-htr.zone2.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  ,  
-htr.zone2.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  ,  
+htr.zone2.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  ,  #
+htr.zone2.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  ,  #
 #
-htr.zone3.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  ,  
-htr.zone3.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  ,  
+htr.zone3.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  ,  #
+htr.zone3.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  ,  #
 #
-htr.zone4.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  ,  
-htr.zone4.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  ,  
+htr.zone4.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  ,  #
+htr.zone4.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  ,  #
 #
-htr.zone5.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  ,  
-htr.zone5.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  ,  
+htr.zone5.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  ,  #
+htr.zone5.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  ,  #
 #
-htr.zone6.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  ,  
-htr.zone6.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  ,  
+htr.zone6.SP.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  ,  #
+htr.zone6.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  ,  #
 #
-htr.zone1.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 1,  ,  
-htr.zone2.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 2,  ,  
-htr.zone3.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 3,  ,  
-htr.zone4.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 4,  ,  
-htr.zone5.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 5,  ,  
-htr.zone6.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 6,  ,  
+htr.zone1.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 1,  ,  #
+htr.zone2.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 2,  ,  #
+htr.zone3.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 3,  ,  #
+htr.zone4.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 4,  ,  #
+htr.zone5.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 5,  ,  #
+htr.zone6.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 6,  ,  #
+# read/set PID parameters
+htr.pidpar.CycTm.R,     R, /dev/ttyUSB0, 4800 8 N 1, 0, PPCT,  ,  ,  #
+htr.pidpar.CycTm.W,     W, /dev/ttyUSB0, 4800 8 N 1, 0, PPCT,  ,  ,  #
+htr.pidpar.Hys.R,       R, /dev/ttyUSB0, 4800 8 N 1, 0, PPHY,  ,  ,  #
+htr.pidpar.Hys.W,       W, /dev/ttyUSB0, 4800 8 N 1, 0, PPHY,  ,  ,  #
+htr.pidpar.PZEn.R,      R, /dev/ttyUSB0, 4800 8 N 1, 0, PPPZ,  ,  ,  #
+htr.pidpar.PZEn.W,      W, /dev/ttyUSB0, 4800 8 N 1, 0, PPPZ,  ,  ,  #
+htr.pidpar.PrBnd.R,     R, /dev/ttyUSB0, 4800 8 N 1, 0, PPPB,  ,  ,  #
+htr.pidpar.PrBnd.W,     W, /dev/ttyUSB0, 4800 8 N 1, 0, PPPB,  ,  ,  #
+htr.pidpar.PidRes.R,    R, /dev/ttyUSB0, 4800 8 N 1, 0, PPRS,  ,  ,  #
+htr.pidpar.PidRes.W,    W, /dev/ttyUSB0, 4800 8 N 1, 0, PPRS,  ,  ,  #
+htr.pidpar.PidRate.R,   R, /dev/ttyUSB0, 4800 8 N 1, 0, PPRT,  ,  ,  #
+htr.pidpar.PidRate.W,   W, /dev/ttyUSB0, 4800 8 N 1, 0, PPRT,  ,  ,  #
+htr.pidpar.PidCoolZ.R,  R, /dev/ttyUSB0, 4800 8 N 1, 0, PPCT,  ,  ,  #
+htr.pidpar.PidCoolZ.W,  W, /dev/ttyUSB0, 4800 8 N 1, 0, PPCT,  ,  ,  #
 #
-htr.IDstring.ID.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, IDST, -,  ,  
-htr.IDstring.Model.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, MODL, -,  ,  
+htr.IDstring.ID.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, IDST, -,  ,  #
+htr.IDstring.Model.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, MODL, -,  ,  #
 htr.IDstring.Zones.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, ZONS, -,  ,  # set active zones
 htr.IDstring.Zones.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, ZONS, -,  ,  # get active zones
 #
@@ -37,4 +52,4 @@ htr.autotune.setp.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, ATSP, -, htr.autotune.setp.
 htr.autotune.setp.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, ATSP, -, htr.autotune.setp.I ,  # xxx.I stored value
 htr.autotune.setp.I, I, --, --, --, --, -1000000,  ,  
 #
-htr.autotune.run.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, ATRN, -, htr.autotune.zone.I htr.autotune.setp.I,  
+htr.autotune.run.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, ATRN, -, htr.autotune.zone.I htr.autotune.setp.I, # 

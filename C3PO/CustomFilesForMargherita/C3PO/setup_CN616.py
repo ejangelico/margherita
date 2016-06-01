@@ -18,7 +18,7 @@ except: raise Exception("Can't to connect to database "+dbase)
  
 cur = conn.cursor()
 
-Table_PVs="CREATE TABLE PVs ("+ \
+Table_CN616="CREATE TABLE CN616 ("+ \
   "id serial PRIMARY KEY,"+ \
   "PVname varchar (32) NOT NULL,"+ \
   "type varchar (32) NOT NULL,"+ \
@@ -32,14 +32,14 @@ Table_PVs="CREATE TABLE PVs ("+ \
 
 f = open('./CN616defs','r')
 try:
-  cur.execute("DROP TABLE pvs")
+  cur.execute("DROP TABLE CN616")
 except:
   print ""
       
-cur.execute(Table_PVs)
+cur.execute(Table_CN616)
 
 for line in f:
-  dbstring = "INSERT INTO pvs (pvname,type,interface,commpars,contrno,\
+  dbstring = "INSERT INTO CN616 (pvname,type,interface,commpars,contrno,\
 parameter,zone,intPV,comment) VALUES ("
   line = re.sub('\n','',line)
   if re.match("^\s*\#",line) :

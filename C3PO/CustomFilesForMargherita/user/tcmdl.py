@@ -33,7 +33,7 @@ cmd = "OmegaModel"
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvr.py","tcmdl.py",cmd] )
+subprocess.call([cmdpath+"pvr.py","tcmdl.py",cmd])
 #                                  ^ 
 #                                  traceback
 

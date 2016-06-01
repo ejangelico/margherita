@@ -15,6 +15,12 @@ import serial
 import time
 import re
 
+# format an int number nr to be exactly nd digits
+def fint(nr,nd):
+  res=str(nr)[-4:]
+  res=res.zfill(nd)
+  return res      
+
 action   = sys.argv[1]
 callfrom = sys.argv[2] # for debugging
 
@@ -142,6 +148,60 @@ if parameter == 'TEMP': # read 1 of 6 temperatures
   res = ser.read(28)
   rr = re.findall('....',res)
   print re.sub('^0{1,3}','',rr[zone])
+####################################
+# PID parameters
+if parameter == 'PPCT' or parameter == 'PPHY' or parameter == 'PPPZ' \
+   or parameter == 'PPPB' or parameter == 'PPRS' or parameter == 'PPRT' \
+   or parameter == 'PPCZ':
+  #get current PID pars
+  cmd = "L"+contrno+'K' # get PIDpars
+  ser.write(cmd)        # 
+  res = ser.read(22)
+  Cycletime  = int(res[:4])
+  Hystereses = int(res[4:6])
+  PidZoneEna = int(res[6:8])
+  PropBand   = int(res[8:12])
+  PIDReset   = int(res[12:16])
+  PIDRate    = int(res[16:20])
+  PIDCoolZnE = int(res[20:22])
+  if rw == 'R':
+    if parameter == 'PPCT': print Cycletime
+    if parameter == 'PPHY': print Hystereses
+    if parameter == 'PPPZ': print PidZoneEna
+    if parameter == 'PPPB': print PropBand
+    if parameter == 'PPRS': print PIDReset
+    if parameter == 'PPRT': print PIDRate
+    if parameter == 'PPCZ': print PIDCoolZnE    
+  if rw == 'W':
+    if parameter == 'PPCT' or parameter == 'PPPB' or \
+       parameter == 'PPRS' or parameter == 'PPRT':
+         value=value[-4:]
+         value=value.zfill(4)        
+    if parameter == 'PPHY' or parameter == 'PPPZ' or parameter == 'PPCZ':
+         value=value[-2:]
+         value=value.zfill(2)        
+    if value.isdigit():
+      if parameter == 'PPCT':
+        Cycletime = value
+      if parameter == 'PPHY':
+        Hystereses = value
+      if parameter == 'PPPZ': 
+        PidZoneEna = value  
+      if parameter == 'PPPB': 
+        PropBand = value
+      if parameter == 'PPRS': 
+        PIDReset = value
+      if parameter == 'PPRT': 
+        PIDRate = value
+      if parameter == 'PPCZ': 
+        PIDCoolZnE = value
+      PIDstring = fint(Cycletime,4)+fint(Hystereses,2)+fint(PidZoneEna,2)+\
+                  fint(PropBand,4)+fint(PIDReset,4)+fint(PIDRate,4)+\
+                  fint(PIDCoolZnE,2)
+      cmd = "L"+contrno+'k'+PIDstring # set PIDpars
+#      print cmd
+      ser.write(cmd)      
+    # if not a positive int number, do nothing
 #####################################
 if parameter == "ATZN": # set zone to do autotune on
   if rw == 'W':
@@ -190,3 +250,5 @@ if parameter == 'ATRN': # start/stop autotune
   cmd = cmd + '0' + atzn
   
 ser.close()
+
+

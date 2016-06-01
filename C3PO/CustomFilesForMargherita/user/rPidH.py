@@ -1,9 +1,7 @@
 #!/opt/rh/python27/root/usr/bin/python
 
-# set active zones of temp controller
-# usage stczn <list of active zones>
-# will enable all zones listed, disable all other ones
-# example stczn 1 3 6 will enable zones 1, 3, and 6, and disable 2, 4, 5
+# read PID hysteresis
+# usage rPidH.py (no arguments)
 # HA level 1
 
 import sys
@@ -11,6 +9,9 @@ import subprocess
 #import subprocess32 # more recent, for POSIX
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
+
+nargs=1
+this = re.sub('^\.\/','',sys.argv[0])
 
 f = open('./userinfo','r')
 unixuser = f.readline()
@@ -29,25 +30,9 @@ rows = cur.fetchall()
 if len(rows) == 1:
   cmdpath = rows[0][0]
 #    
+if len(sys.argv) <> 1: raise Exception(this+"needs "+str(nargs)+" argument(s)")
   
-cmd = "OmegaZones"
-zones = 0
-for i in range(1,len(sys.argv)):
-  zn=int(sys.argv[i])
-  if zn<1 or zn>6:
-    continue
-  if zn<4:
-    zn-=1
-  zb = 1 << zn
-#  print zb
-  zones = zones | zb
-  zonestring = format(zones, '02X')
-
-# TMx is a PV alias (look into file aliasdefs or database table "alias")
-# call pvw: write to PV
-#cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
-#print cmd
-subprocess.call([cmdpath+"pvw.py","stczn.py",cmd,zonestring])
+subprocess.call([cmdpath+"pvr.py",this,"htr.pidpar.Hys.R"])
 #                                  ^ 
 #                                  traceback
 
