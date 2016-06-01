@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 import psycopg2
 import re
@@ -14,8 +14,7 @@ try:
   conn.autocommit = True
   # need to autocommit - otherwise entries visible only to this script
   # but not to psql interactive session
-except:
-  print "I am unable to connect to the database"
+except: raise Exception("Can't to connect to database "+dbase)
  
 cur = conn.cursor()
 

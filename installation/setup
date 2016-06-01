@@ -1,5 +1,5 @@
 # UNIX user name - postgresql needs to know that
-username: bwa
+username: marg
 # name of the database to be used
 database: margherita
 #

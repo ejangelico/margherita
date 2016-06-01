@@ -46,9 +46,6 @@ for($m=0;$m<scalar(@ln);++$m) {
   #
 }
 
-# print "user dir: ".$userdir."\n";
-# exit;
-
 if(defined($userdir)) {system("mkdir ".$userdir);} else {die "user directory is not defined";}
 if(defined($systemdir)) {system("mkdir ".$systemdir);} else {die "system directory is not defined";}
 if(defined($logdir)) {system("mkdir ".$logdir);} else {die "logging directory is not defined";}

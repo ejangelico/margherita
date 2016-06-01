@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # write to a PV
 # usage pvw <pv name> <value>
@@ -13,6 +13,7 @@ import re
 if len(sys.argv) <> 4:
   raise Exception('pvw needs 3 arguments')
 
+calledfrom= sys.argv[1]
 pvname  = sys.argv[2]
 value = sys.argv[3]
 
@@ -27,11 +28,12 @@ dbase    = re.sub('\n','',dbase)
 # look if 1st argument is an alias
 try:
   conn = psycopg2.connect("dbname='"+dbase+"' user='"+unixuser+"' ")
-except:
-  print "Unable to connect to database "+dbase
+except: raise Exception("Can't to connect to database "+dbase)
+
 cur = conn.cursor()
 
-cur.execute("SELECT pvname FROM alias WHERE alias = '"+pvname+"' AND rw = 'W'")
+dbstring = "SELECT pvname FROM alias WHERE alias = '"+pvname+"' AND rw = 'W'  AND "+"(context = '"+calledfrom+"' OR context = 'any' OR context = '')"
+cur.execute(dbstring)
 rows = cur.fetchall()
 if len(rows) > 1:
   raise Exception('pvw found multiple alias correspondences')
@@ -46,7 +48,7 @@ rows = cur.fetchall()
 if len(rows) > 1:
   raise Exception('pvw found multiple entries for PV '+pvname)
 if len(rows) == 0:
-  raise Exception('pvw did not find a PV pvnamed '+pvname)
+   raise Exception("pvr did not find a PV named "+pvname+" or an alias "+pvname+" in context "+calledfrom)
 # check if type permits writing to PV
 if re.match('W',rows[0][2]) == False:  # rows[0][.]: we know there is only one PV
   raise Exception('can\'t write to PV '+pvname)  
@@ -64,6 +66,6 @@ if len(rows) == 1:
     
     
 # call driver
-subprocess.call([cmdpath+driver+".py",'EXEC',"pvw.py",sectb,pvname,value])
+subprocess.call([cmdpath+driver+".py",'EXEC',"pvw.py",sectb,pvname,value] )
 
 # subprocess.check_output([cmdpath+driver+".py",'EXEC',"pvr.py",sectb,pvname])

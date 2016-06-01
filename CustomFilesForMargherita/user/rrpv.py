@@ -17,15 +17,12 @@ dbase    = f.readline()
 dbase    = re.sub('\n','',dbase)
 
 # get path to level 0
-try:
-  conn = psycopg2.connect("dbname='"+dbase+"' user='"+unixuser+"' ")
-except: raise Exception("Can't to connect to database "+dbase)
-
+try: conn = psycopg2.connect("dbname='"+dbase+"' user='"+unixuser+"' ")
+except: raise Exception("Can't connect to database "+dbase+" as user "+unixuser)
 cur = conn.cursor()
-try:
-  cur.execute("SELECT value FROM admin WHERE key = 'HSpath'")
-except:
-  print "Can\'t find level-0 path in table admin"
+try: cur.execute("SELECT value FROM admin WHERE key = 'HSpath'")
+except: raise Exception("Can\'t find level-0 path in table admin")
+
 rows = cur.fetchall()
 if len(rows) == 1:
   cmdpath = rows[0][0]
@@ -39,7 +36,7 @@ pvname=sys.argv[1]
 # call pvw: write to PV
 #cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
 #print cmd
-subprocess.call([cmdpath+"pvr.py","rrpv.py",pvname] )
+subprocess.call([cmdpath+"pvr.py","rrpv.py",pvname])
 #                                  ^ 
 #                                  traceback
 
