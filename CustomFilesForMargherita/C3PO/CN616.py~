@@ -218,24 +218,7 @@ if parameter == 'HALM': # read/write 1 of 6 high alarms
     rsp = re.sub('^0{1,3}','',rr[zone])
     print rsp
     lastValueToDb(tb_in_db,rsp,pvname)
-####################################  
-if parameter == 'LALM': # read/write 1 of 6 low alarms
-  cmd = "L"+contrno+'D' # get alarms
-  SerOutput(cmd)
-  res=SerInput(24,'0123456789ABCDEF01234567')  
-  rr = re.findall('....',res) # regex to split into chunks of 4
-  if rw == 'W':
-    value=value[-4:]
-    value=value.zfill(4)
-    rr[zone]=value
-    ret = rr[0]+rr[1]+rr[2]+rr[3]+rr[4]+rr[5]
-    cmd = "L"+contrno+'d'+ret
-    SerOutput(cmd)
-    lastValueToDb(tb_in_db,value,pvname)
-  if rw == 'R':
-    rsp = re.sub('^0{1,3}','',rr[zone])
-    print rsp
-    lastValueToDb(tb_in_db,rsp,pvname)
+
 ####################################
 # PID parameters
 if parameter == 'PPCT' or parameter == 'PPHY' or parameter == 'PPPZ' \

@@ -12,32 +12,6 @@ htr.zone5.SP.W, W, CN616, CN616,  ,  ,  ,  ,  #
 htr.zone5.SP.R, R, CN616, CN616,  ,  ,  ,  ,  #
 htr.zone6.SP.W, W, CN616, CN616,  ,  ,  ,  ,  #
 htr.zone6.SP.R, R, CN616, CN616,  ,  ,  ,  ,  #
-# high alarms
-htr.zone1.HA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone1.HA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone2.HA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone2.HA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone3.HA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone3.HA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone4.HA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone4.HA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone5.HA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone5.HA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone6.HA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone6.HA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-# low alarms
-htr.zone1.LA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone1.LA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone2.LA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone2.LA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone3.LA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone3.LA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone4.LA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone4.LA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone5.LA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone5.LA.R, R, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone6.LA.W, W, CN616, CN616,  ,  ,  ,  ,  #
-htr.zone6.LA.R, R, CN616, CN616,  ,  ,  ,  ,  #
 # actual temperatures
 htr.zone1.TM.R, R, CN616, CN616,  ,  ,  ,  ,  #
 htr.zone2.TM.R, R, CN616, CN616,  ,  ,  ,  ,  #

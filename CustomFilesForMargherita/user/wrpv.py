@@ -1,4 +1,4 @@
-#!/opt/rh/python27/root/usr/bin/python
+#!/usr/bin/python
 
 # write raw PV - for debugging
 # usage wrpv <PV name> <value>

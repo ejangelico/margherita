@@ -1,17 +1,18 @@
 #!/usr/bin/python
 
-helpA = "read PID I parameter"
-helpB = "usage rPidI (no arguments)"
-helpC = ""
-# HA level 1
-
 import sys
 import subprocess
 #import subprocess32 # more recent, for POSIX
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
 
-nargs=0
+helpA = "set zones active under PID control"
+helpB = "usage sPidD.py <0|1> <0|1> <0|1> <0|1> <0|1> <0|1> "
+helpC = "to (de)activate zones 1 .. 6"
+
+# HA level 1
+
+nargs=6 # not counting sys.argv[0]
 this = re.sub('^\.\/','',sys.argv[0])
 
 f = open('./userinfo','r')
@@ -30,17 +31,17 @@ except: raise Exception("Can\'t find level-0 path in table admin")
 rows = cur.fetchall()
 if len(rows) == 1:
   cmdpath = rows[0][0]
-#    
-#if len(sys.argv) <> 1: raise Exception(this+"needs "+str(nargs)+" argument(s)")
- 
-if len(sys.argv) <> (nargs+1) or sys.argv[len(sys.argv) - 1] == "help":
+#  
+if len(sys.argv) <> (nargs+1) or sys.args[1] == "help":
   print helpA
   print helpB
   print helpC
   sys.exit()
-          
-res=subprocess.check_output([cmdpath+"pvr.py",this,"htr.pidpar.PidRes.R"])
+
+# if len(sys.argv) <> 2: raise Exception(this+"needs "+str(nargs)+" argument(s)")
+zonestring = sys.argv[1]+" "+sys.argv[2]+" "+sys.argv[3]+" "+sys.argv[4]+" "+sys.argv[5]+" "+sys.argv[6]  
+subprocess.call([cmdpath+"pvw.py",this,"htr.pidpar.PidZEn.W",zonestring])
 #                                  ^ 
 #                                  traceback
-print res
+
 

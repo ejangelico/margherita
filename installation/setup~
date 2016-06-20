@@ -1,7 +1,7 @@
 # UNIX user name - postgresql needs to know that
 username: xxx
 # name of the database to be used
-database: xcap
+database: margherita
 #
 # name of user directory, either full path starting with / or relative to here
 # full path example: /home/xxx/Incom/xcap/characterization/user/
@@ -11,4 +11,6 @@ user directory: ./../user/
 system directory: ./../C3PO/
 # name of logging directory, same way as for user directory
 logging directory: ./../logs/
-
+#
+shebang: !/opt/rh/python27/root/usr/bin/python
+# shebang: !/usr/bin/python

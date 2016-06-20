@@ -1,4 +1,4 @@
-#!/opt/rh/python27/root/usr/bin/python
+#!/usr/bin/python
 
 # get active zones of temp controller
 # usage stczn 

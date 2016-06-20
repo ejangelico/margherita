@@ -1,8 +1,7 @@
 #!/usr/bin/python
 
-helpA = "read PID I parameter"
-helpB = "usage rPidI (no arguments)"
-helpC = ""
+# read a low alarm
+# usage rla <zone no 1..6> <value>
 # HA level 1
 
 import sys
@@ -10,9 +9,6 @@ import subprocess
 #import subprocess32 # more recent, for POSIX
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
-
-nargs=0
-this = re.sub('^\.\/','',sys.argv[0])
 
 f = open('./userinfo','r')
 unixuser = f.readline()
@@ -31,16 +27,15 @@ rows = cur.fetchall()
 if len(rows) == 1:
   cmdpath = rows[0][0]
 #    
-#if len(sys.argv) <> 1: raise Exception(this+"needs "+str(nargs)+" argument(s)")
- 
-if len(sys.argv) <> (nargs+1) or sys.argv[len(sys.argv) - 1] == "help":
-  print helpA
-  print helpB
-  print helpC
-  sys.exit()
-          
-res=subprocess.check_output([cmdpath+"pvr.py",this,"htr.pidpar.PidRes.R"])
+if len(sys.argv) <> 2: raise Exception('rha needs 1 argument')
+  
+LAno = "LA"+sys.argv[1]
+# SPx is a PV alias (look into file aliasdefs or database table "alias")
+
+# call pvw: write to PV
+#cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
+#print cmd
+subprocess.call([cmdpath+"pvr.py","rla.py",LAno])
 #                                  ^ 
 #                                  traceback
-print res
 

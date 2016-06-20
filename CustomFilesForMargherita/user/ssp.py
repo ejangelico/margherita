@@ -1,4 +1,4 @@
-#!/opt/rh/python27/root/usr/bin/python
+#!/usr/bin/python
 
 # send a value to a setpoint
 # usage ssp <SP no 1..6> <value>
@@ -24,11 +24,9 @@ try: cur.execute("SELECT value FROM admin WHERE key = 'HSpath'")
 except: raise Exception("Can\'t find level-0 path in table admin")
 
 rows = cur.fetchall()
-if len(rows) == 1:
-  cmdpath = rows[0][0]
+if len(rows) == 1: cmdpath = rows[0][0]
 #    
-if len(sys.argv) <> 3:
-  raise Exception('mva needs 2 arguments')
+if len(sys.argv) <> 3: raise Exception('ssp needs 2 arguments')
   
 SPno = "SP"+sys.argv[1]
 value = sys.argv[2]

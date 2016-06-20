@@ -5,11 +5,11 @@ import subprocess
 import time
 import os
 
-zones = [1, 2]
+zones = [1,2,3,4,5,6]
 
 filecount = 0
-while os.path.exists('controlrun%s.txt' % filecount):
-	filecount+=1
+#while os.path.exists('controlrun%s.txt' % filecount):
+#	filecount+=1
 
 while True:
 	if(int(time.strftime('%S')) % 2 == 0):

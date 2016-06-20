@@ -1,7 +1,8 @@
-#!/opt/rh/python27/root/usr/bin/python
+#!/usr/bin/python
 
-# read PID D parameter
-# usage rPidD (no arguments)
+helpA = "read PID D parameter"
+helpB = "usage rPidD (no arguments)"
+helkpC = ""
 # HA level 1
 
 import sys
@@ -10,7 +11,7 @@ import subprocess
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
 
-nargs=1
+nargs=0
 this = re.sub('^\.\/','',sys.argv[0])
 
 f = open('./userinfo','r')
@@ -30,10 +31,16 @@ rows = cur.fetchall()
 if len(rows) == 1:
   cmdpath = rows[0][0]
 #    
-if len(sys.argv) <> 1: raise Exception(this+"needs "+str(nargs)+" argument(s)")
-  
-subprocess.call([cmdpath+"pvr.py",this,"htr.pidpar.PidRate.R"])
+#if len(sys.argv) <> 1: raise Exception(this+"needs "+str(nargs)+" argument(s)")
+
+if len(sys.argv) <> (nargs+1) or sys.argv[len(sys.argv) - 1] == "help":
+  print helpA
+  print helpB
+  print helpC
+  sys.exit()
+          
+res=subprocess.check_output([cmdpath+"pvr.py",this,"htr.pidpar.PidRate.R"])
 #                                  ^ 
 #                                  traceback
-
+print res
 

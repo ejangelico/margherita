@@ -1,4 +1,4 @@
-#!/opt/rh/python27/root/usr/bin/python
+#!/usr/bin/python
 
 # read PID hysteresis
 # usage rPidH.py (no arguments)

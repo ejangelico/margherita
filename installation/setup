@@ -1,4 +1,5 @@
 # UNIX user name - postgresql needs to know that
+#username: xxx
 username: marg
 # name of the database to be used
 database: margherita
@@ -11,4 +12,6 @@ user directory: ./../user/
 system directory: ./../C3PO/
 # name of logging directory, same way as for user directory
 logging directory: ./../logs/
-
+#
+shebang: !/opt/rh/python27/root/usr/bin/python
+# shebang: !/usr/bin/python

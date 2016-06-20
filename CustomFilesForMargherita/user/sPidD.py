@@ -1,7 +1,7 @@
-#!/opt/rh/python27/root/usr/bin/python
+#!/usr/bin/python
 
-# set PID hysteresis
-# usage rPidH.py <hysteresis>
+# set PID D parameter
+# usage sPidD.py <value>
 # HA level 1
 
 import sys

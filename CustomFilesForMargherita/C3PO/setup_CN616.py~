@@ -41,7 +41,7 @@ cur.execute(Table_CN616)
 
 for line in f:
   dbstring = "INSERT INTO CN616 (pvname,type,interface,commpars,contrno,\
-parameter,value,lastAccess,intPV,comment) VALUES ("
+parameter,value,lastaccess,intPV,comment) VALUES ("
   line = re.sub('\n','',line)
   if re.match("^\s*\#",line) :
     #f.next()

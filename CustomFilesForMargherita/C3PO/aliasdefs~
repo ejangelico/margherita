@@ -18,7 +18,7 @@ SP6, W, , htr.zone6.SP.W,
 SP6, R, , htr.zone6.SP.R,  
 # high alarms
 HA1, W, , htr.zone1.HA.W,  
-HA1, R, , htr.zone1.HA.R,  
+SP1, R, , htr.zone1.HA.R,  
 #
 HA2, W, , htr.zone2.HA.W,  
 HA2, R, , htr.zone2.HA.R,  

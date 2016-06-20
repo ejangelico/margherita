@@ -21,42 +21,42 @@ htr.zone6.SP.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  , ,  # setpoint zone 6
 ########################################
 ## high alarms
 htr.zone1.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 1,  ,  , # high alarm zone 1
-htr.zone1.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 1,  ,  , # high alarm zone 1
+htr.zone1.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  ,  , # high alarm zone 1
 #
-htr.zone2.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 2,  , ,  # high alarm zone 2
-htr.zone2.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 2,  , ,  # high alarm zone 2
+htr.zone2.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  , ,  # high alarm zone 2
+htr.zone2.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  , ,  # high alarm zone 2
 #
-htr.zone3.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 3,  , ,  # high alarm zone 3
-htr.zone3.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 3,  , ,  # high alarm zone 3
+htr.zone3.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  , ,  # high alarm zone 3
+htr.zone3.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  , ,  # high alarm zone 3
 #
-htr.zone4.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 4,  , ,  # high alarm zone 4
-htr.zone4.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 4,  , ,  # high alarm zone 4
+htr.zone4.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  , ,  # high alarm zone 4
+htr.zone4.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  , ,  # high alarm zone 4
 #
-htr.zone5.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 5,  , ,  # high alarm zone 5
-htr.zone5.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 5,  , ,  # high alarm zone 5
+htr.zone5.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  , ,  # high alarm zone 5
+htr.zone5.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  , ,  # high alarm zone 5
 #
-htr.zone6.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 6,  , ,  # high alarm zone 6
-htr.zone6.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, HALM, 6,  , ,  # high alarm zone 6
+htr.zone6.HA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  , ,  # high alarm zone 6
+htr.zone6.HA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  , ,  # high alarm zone 6
 #
 ###########################################
 # low alarms
-htr.zone1.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 1,  ,  , # low alarm zone 1
-htr.zone1.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 1,  ,  , # low alarm zone 1
+htr.zone1.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  ,  , # low alarm zone 1
+htr.zone1.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 1,  ,  , # low alarm zone 1
 #
-htr.zone2.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 2,  , ,  # low alarm zone 2
-htr.zone2.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 2,  , ,  # low alarm zone 2
+htr.zone2.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  , ,  # low alarm zone 2
+htr.zone2.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 2,  , ,  # low alarm zone 2
 #
-htr.zone3.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 3,  , ,  # low alarm zone 3
-htr.zone3.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 3,  , ,  # low alarm zone 3
+htr.zone3.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  , ,  # low alarm zone 3
+htr.zone3.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 3,  , ,  # low alarm zone 3
 #
-htr.zone4.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 4,  , ,  # low alarm zone 4
-htr.zone4.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 4,  , ,  # low alarm zone 4
+htr.zone4.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  , ,  # low alarm zone 4
+htr.zone4.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 4,  , ,  # low alarm zone 4
 #
-htr.zone5.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 5,  , ,  # low alarm zone 5
-htr.zone5.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 5,  , ,  # low alarm zone 5
+htr.zone5.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  , ,  # low alarm zone 5
+htr.zone5.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 5,  , ,  # low alarm zone 5
 #
-htr.zone6.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 6,  , ,  # low alarm zone 6
-htr.zone6.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, LALM, 6,  , ,  # low alarm zone 6
+htr.zone6.LA.W, W, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  , ,  # low alarm zone 6
+htr.zone6.LA.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, SETP, 6,  , ,  # low alarm zone 6
 #
 ###########################################
 htr.zone1.TM.R, R, /dev/ttyUSB0, 4800 8 N 1, 0, TEMP, 1,  , ,  # actual temperature in zone 1

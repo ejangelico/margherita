@@ -1,8 +1,7 @@
 #!/usr/bin/python
 
-helpA = "read PID I parameter"
-helpB = "usage rPidI (no arguments)"
-helpC = ""
+# set high alarm
+# usage sha.py <zone no 1..6> <value>
 # HA level 1
 
 import sys
@@ -10,9 +9,6 @@ import subprocess
 #import subprocess32 # more recent, for POSIX
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
-
-nargs=0
-this = re.sub('^\.\/','',sys.argv[0])
 
 f = open('./userinfo','r')
 unixuser = f.readline()
@@ -28,19 +24,15 @@ try: cur.execute("SELECT value FROM admin WHERE key = 'HSpath'")
 except: raise Exception("Can\'t find level-0 path in table admin")
 
 rows = cur.fetchall()
-if len(rows) == 1:
-  cmdpath = rows[0][0]
+if len(rows) == 1: cmdpath = rows[0][0]
 #    
-#if len(sys.argv) <> 1: raise Exception(this+"needs "+str(nargs)+" argument(s)")
- 
-if len(sys.argv) <> (nargs+1) or sys.argv[len(sys.argv) - 1] == "help":
-  print helpA
-  print helpB
-  print helpC
-  sys.exit()
-          
-res=subprocess.check_output([cmdpath+"pvr.py",this,"htr.pidpar.PidRes.R"])
-#                                  ^ 
-#                                  traceback
-print res
+if len(sys.argv) <> 3: raise Exception('sha needs 2 arguments')
+  
+HAno = "HA"+sys.argv[1]
+value = sys.argv[2]
+
+# call pvw: write to PV
+#cmd = cmdpath+"pvw.py ssp.py "+SPno+" "+value
+#print cmd
+subprocess.call([cmdpath+"pvw.py","sha.py",HAno,value])
 

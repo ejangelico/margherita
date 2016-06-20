@@ -1,4 +1,4 @@
-#!/opt/rh/python27/root/usr/bin/python
+#!/usr/bin/python
 
 # read raw PV - for debugging purposes
 # usage rrpv <PV name>
