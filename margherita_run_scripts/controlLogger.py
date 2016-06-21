@@ -51,8 +51,8 @@ def logTemperatures(templogfile):
 	output = []
 	for x in zoneArray:
 		output.append(x.getZoneTemp())
-
-
+	outfile.write(','.join(output) + ',' + time.strftime("%m-%d-%y %H:%M:%S") + "\n")
+	outfile.close()
 	print "Logged temps..."
 
 
@@ -64,7 +64,7 @@ def saveSetfileSnapshot(snapshotfile, zoneArray):
 		print "Could not open snapshot file"
 		return
 
-	outfile.write("********" + time.strftime("%y:%m:%d %H:%M:%S") + "*********")
+	outfile.write("********" + time.strftime("%m-%d-%y %H:%M:%S") + "*********")
 	for x in zoneArray:
 		outfile.write(str(x))
 

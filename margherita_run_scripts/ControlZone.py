@@ -74,9 +74,9 @@ class ControlZone:
 		return self.changed
 
 	def getZoneTemp(self):
-		process = subprocess.Popen(['./rtm.py', str(chNum)], stdout=subprocess.PIPE)
+		process = subprocess.Popen(['../user/rtm.py', str(self.zone)], stdout=subprocess.PIPE)
 		out, err = process.communicate()
-		outfile.write(str(out.split('\n')[0]))
+		return out.split('\n')[0]
 
 
 
