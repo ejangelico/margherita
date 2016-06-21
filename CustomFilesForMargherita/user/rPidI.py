@@ -10,6 +10,8 @@ import subprocess
 #import subprocess32 # more recent, for POSIX
 import psycopg2  # needed to access database to get path to HA Level 0
 import re
+import os
+os.chdir(os.path.dirname(sys.argv[0]))
 
 nargs=0
 this = re.sub('^\.\/','',sys.argv[0])
