@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 
 # set active zones of temp controller
 # usage stczn <list of active zones>
@@ -34,6 +34,8 @@ if len(rows) == 1:
   
 cmd = "OmegaZones"
 zones = 0
+
+
 for i in range(1,len(sys.argv)):
   zn=int(sys.argv[i])
   if zn<1 or zn>6:
@@ -44,6 +46,12 @@ for i in range(1,len(sys.argv)):
 #  print zb
   zones = zones | zb
   zonestring = format(zones, '02X')
+
+#if all zones are disabled, the for loop does not execute
+#the zonestring should be 00
+if(len(sys.argv) == 1):
+	zonestring = '00'
+
 
 # TMx is a PV alias (look into file aliasdefs or database table "alias")
 # call pvw: write to PV
