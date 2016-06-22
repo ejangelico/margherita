@@ -39,18 +39,22 @@ def setAllZoneParameters(setfile, zoneArray):
 			zoneArray[i].setChanged(True)	
 
 def sendModifiedParameters(zoneArray):
+	changecount = 0
 	#look at each zone and see if they have changed
 	for i in range(len(zoneArray)):
 		if(zoneArray[i].hasChanged()):
-			#if any changes occur, one must resend all of the "enable" parameters
-			#for each zone, because the enable zones controller command requires
-			#all zones-to-be-enabled to be passed
-			enabledZones = findEnabledZones(zoneArray)
-			sendEnabledZones(enabledZones)
+			changecount += 1
 
 			#send other changed parameters
 			zoneArray[i].sendParameters()
-			readEnabledZones()
+
+
+	#if any changes occur, one must resend all of the "enable" parameters
+	#for each zone, because the enable zones controller command requires
+	#all zones-to-be-enabled to be passed
+	if(changecount > 0):
+		enabledZones = findEnabledZones(zoneArray)
+		sendEnabledZones(enabledZones)
 
 def findEnabledZones(zoneArray):
 	zonesToBe = []

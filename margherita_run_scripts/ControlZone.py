@@ -33,6 +33,16 @@ class ControlZone:
 		return output
 
 	def sendParameters(self):
+
+		#send setpoint
+		val = subprocess.call(["../user/ssp.py", str(self.setpoint)])
+
+		#send high alarm
+		val = subprocess.call(["../user/sha.py", str(self.ha)])
+
+		#send low alarm
+		val = subprocess.call(["../user/sla.py", str(self.la)])
+
 		print "SENT NEW PARAMETERS on zone " + str(self.zone)
 		self.changed = False
 
