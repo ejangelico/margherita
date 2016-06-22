@@ -2,6 +2,7 @@
 import time
 import os
 import sys
+import subprocess
 import numpy as np
 import ControlZone
 
@@ -41,8 +42,48 @@ def sendModifiedParameters(zoneArray):
 	#look at each zone and see if they have changed
 	for i in range(len(zoneArray)):
 		if(zoneArray[i].hasChanged()):
-			zoneArray[i].sendParameters()
+			#if any changes occur, one must resend all of the "enable" parameters
+			#for each zone, because the enable zones controller command requires
+			#all zones-to-be-enabled to be passed
+			enabledZones = findEnabledZones(zoneArray)
+			sendEnabledZones(enabledZones)
 
+			#send other changed parameters
+			zoneArray[i].sendParameters()
+			readEnabledZones()
+
+def findEnabledZones(zoneArray):
+	zonesToBe = []
+	for x in zoneArray:
+		if(x.getEnable()):
+			zonesToBe.append(x.getZone())
+
+	#The Omega controller must have 1 zone active
+	#at all times. Temporarily, we designate zone 3
+	#to fill that role, as it has a broken relay
+	#In the future, this should change to 
+	#trigger the alarm relay, shutting all zones off
+	if(len(zonesToBe) == 0):
+		zonesToBe.append(3)
+
+	return zonesToBe
+
+def sendEnabledZones(zones):
+	#the command for enabling zones requires one to give
+	#all of the zones-to-be-enabled as an argument
+	#any zones which are not passed to ./stczn.py are Disabled by default
+
+	command = ["../user/stczn.py"]
+	for z in zones:
+		command.append(str(z))
+
+	val = subprocess.call(command)
+
+#a debugging function
+def readEnabledZones():
+	process = subprocess.Popen(['../user/rtczn.py'], stdout=subprocess.PIPE)
+	out, err = process.communicate()
+	print out
 
 
 
