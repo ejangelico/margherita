@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import time
 import os
 import sys
 import subprocess
@@ -35,13 +36,16 @@ class ControlZone:
 	def sendParameters(self):
 
 		#send setpoint
-		val = subprocess.call(["../user/ssp.py", str(self.setpoint)])
+		val = subprocess.call(["../user/ssp.py",str(self.zone), str(self.setpoint)])
+		time.sleep(0.5)
 
 		#send high alarm
-		val = subprocess.call(["../user/sha.py", str(self.ha)])
+		val = subprocess.call(["../user/sha.py", str(self.zone),str(self.ha)])
+		time.sleep(0.5)
 
 		#send low alarm
-		val = subprocess.call(["../user/sla.py", str(self.la)])
+		val = subprocess.call(["../user/sla.py", str(self.zone),str(self.la)])
+		time.sleep(0.5)
 
 		print "SENT NEW PARAMETERS on zone " + str(self.zone)
 		self.changed = False
