@@ -36,6 +36,7 @@ class ControlZone:
 
 	def sendParameters(self):
 
+		print "deciding to send regular parameters on zone " + str(self.zone)
 		#send setpoint
 		val = subprocess.call(["../user/ssp.py", str(self.zone), str(self.setpoint)] )
 		time.sleep(0.3)

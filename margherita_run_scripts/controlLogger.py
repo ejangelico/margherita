@@ -59,6 +59,7 @@ def sendModifiedParameters(zoneArray):
 			x.setEnableChanged(False)
 
 	if(enChangeCount > 0):
+		print "deciding to send enabled zones"
 		enabledZones = findEnabledZones(zoneArray)
 		sendEnabledZones(enabledZones)
 		print "SENT Enabled Zones"
@@ -103,9 +104,10 @@ def readEnabledZones():
 def logTemperatures(templogfile):
 	outfile = open(templogfile,'a')
 	output = []
+	print "deciding to log temps"
 	for x in zoneArray:
 		output.append(x.getZoneTemp())
-		time.sleep(0.2)
+		time.sleep(0.5)
 	outfile.write(','.join(output) + ',' + time.strftime("%m-%d-%y %H:%M:%S") + "\n")
 	outfile.close()
 	print "Logged temps..."
