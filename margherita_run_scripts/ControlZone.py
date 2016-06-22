@@ -12,6 +12,7 @@ class ControlZone:
 		self.ha = h 				#alarm at "high alarm", 'ha' degrees above setpoint
 		self.la = l 				#alarm at "low alarm", 'la' degrees below setpoint
 		self.changed = False		#marks if the zone has recently had a changed parameter, 0 for false 1 for true
+		self.enableChanged = False
 
 	def printZone(self):
 		print "-----------------------"
@@ -65,6 +66,9 @@ class ControlZone:
 	def setChanged(self, c):
 		self.changed = c
 
+	def setEnableChanged(self, c):
+		self.enableChanged = c
+
 	def getZone(self):
 		return self.zone
 
@@ -82,6 +86,9 @@ class ControlZone:
 
 	def hasChanged(self):
 		return self.changed
+
+	def hasEnableChanged(self):
+		return self.enableChanged
 
 	def getZoneTemp(self):
 		process = subprocess.Popen(['../user/rtm.py', str(self.zone)], stdout=subprocess.PIPE)

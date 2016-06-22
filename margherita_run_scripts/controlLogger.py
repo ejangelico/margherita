@@ -25,6 +25,7 @@ def setAllZoneParameters(setfile, zoneArray):
 		if(bool(lineStructure[i][1]) != zoneArray[i].getEnable()):
 			zoneArray[i].setEnable(bool(lineStructure[i][1]))
 			zoneArray[i].setChanged(True)
+			zoneArray[i].setEnableChanged(True)
 			
 		if(int(lineStructure[i][2]) != zoneArray[i].getSetpoint()):
 			zoneArray[i].setSetpoint(int(lineStructure[i][2]))
@@ -39,22 +40,29 @@ def setAllZoneParameters(setfile, zoneArray):
 			zoneArray[i].setChanged(True)	
 
 def sendModifiedParameters(zoneArray):
-	changecount = 0
+
 	#look at each zone and see if they have changed
-	for i in range(len(zoneArray)):
-		if(zoneArray[i].hasChanged()):
-			changecount += 1
-
-			#send other changed parameters
-			zoneArray[i].sendParameters()
+	for x in zoneArray:
+		if(x.hasChanged()):
+			#changed parameters
+			x.sendParameters()
 
 
-	#if any changes occur, one must resend all of the "enable" parameters
+	#One must send all of the "enable" parameters
 	#for each zone, because the enable zones controller command requires
 	#all zones-to-be-enabled to be passed
-	if(changecount > 0):
+	enChangeCount = 0
+	for x in zoneArray
+		if(x.hasEnableChanged()):
+			enChangeCount += 1
+			#will set new enabled channels in a second, so reset to False
+			x.setEnableChanged(False)
+
+	if(enChangeCount > 0):
 		enabledZones = findEnabledZones(zoneArray)
 		sendEnabledZones(enabledZones)
+
+
 
 def findEnabledZones(zoneArray):
 	zonesToBe = []
