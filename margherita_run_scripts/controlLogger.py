@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/rh/python27/root/usr/bin/python
 import time
 import os
 import sys
@@ -52,7 +52,7 @@ def sendModifiedParameters(zoneArray):
 	#for each zone, because the enable zones controller command requires
 	#all zones-to-be-enabled to be passed
 	enChangeCount = 0
-	for x in zoneArray
+	for x in zoneArray:
 		if(x.hasEnableChanged()):
 			enChangeCount += 1
 			#will set new enabled channels in a second, so reset to False
@@ -61,6 +61,7 @@ def sendModifiedParameters(zoneArray):
 	if(enChangeCount > 0):
 		enabledZones = findEnabledZones(zoneArray)
 		sendEnabledZones(enabledZones)
+		print "SENT Enabled Zones"
 
 
 
@@ -89,11 +90,11 @@ def sendEnabledZones(zones):
 	for z in zones:
 		command.append(str(z))
 
-	val = subprocess.call(command)
+	val = subprocess.call(command )
 
 #a debugging function
 def readEnabledZones():
-	process = subprocess.Popen(['../user/rtczn.py'], stdout=subprocess.PIPE)
+	process = subprocess.Popen(['../user/rtczn.py'], stdin=subprocess.PIPE, stdout=subprocess.PIPE )
 	out, err = process.communicate()
 	print out
 
@@ -104,6 +105,7 @@ def logTemperatures(templogfile):
 	output = []
 	for x in zoneArray:
 		output.append(x.getZoneTemp())
+		time.sleep(0.2)
 	outfile.write(','.join(output) + ',' + time.strftime("%m-%d-%y %H:%M:%S") + "\n")
 	outfile.close()
 	print "Logged temps..."
@@ -165,9 +167,10 @@ if __name__ == '__main__':
 			saveSetfileSnapshot(snapshotfile, zoneArray)
 			sendModifiedParameters(zoneArray)
 			lastmod = mtime
+			time.sleep(0.3)
 
 		logTemperatures(templogfile)
-		time.sleep(3)
+		time.sleep(0.3)
 
 	
 
