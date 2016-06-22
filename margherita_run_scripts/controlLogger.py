@@ -53,6 +53,7 @@ def sendModifiedParameters(zoneArray):
 	#for each zone, because the enable zones controller command requires
 	#all zones-to-be-enabled to be passed
 	if(changecount > 0):
+		print "Setting enabled zones"
 		enabledZones = findEnabledZones(zoneArray)
 		sendEnabledZones(enabledZones)
 
