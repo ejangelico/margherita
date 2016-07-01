@@ -8,7 +8,13 @@ import ControlZone
 
 
 global usrFile
-usrFile = ControlZone.getUserFileDirectory()
+usrFile = ControlZone.getUserFileDirectory()  	#directory that points to the C3P0 user scripts
+
+global timeSpacing 
+timeSpacing = ControlZone.getTimeSpacing() 	#seconds to wait in between commands send to Omega
+
+global timeOut
+timeOut = ControlZone.getTimeOut() 		#seconds to wait for timeout on commands
 
 #sets the zone parameters for each zone in the controller set
 def setAllZoneParameters(setfile, zoneArray):
@@ -93,8 +99,11 @@ def sendEnabledZones(zones):
 	command = [usrFile + '/stczn.py']
 	for z in zones:
 		command.append(str(z))
-
-	val = subprocess.call(command )
+	try:
+		val = subprocess.call(command, timeout=timeOut)
+	except subprocess.TimeoutExpired:
+		print "CALL() Timed out, trying again"
+		sendEnabledZones(zones)
 
 #a debugging function
 def readEnabledZones():
@@ -110,7 +119,7 @@ def logTemperatures(templogfile):
 	print "deciding to log temps"
 	for x in zoneArray:
 		output.append(x.getZoneTemp())
-		time.sleep(0.5)
+		time.sleep(timeSpacing)
 	outfile.write(','.join(output) + ',' + time.strftime("%m-%d-%y %H:%M:%S") + "\n")
 	outfile.close()
 	print "Logged temps..."
@@ -123,12 +132,13 @@ def saveSetfileSnapshot(snapshotfile, zoneArray):
 	except IOError:
 		print "Could not open snapshot file"
 		return
-
+	print "opened snapshot file, deciding to write snapshot..."
 	outfile.write("********" + time.strftime("%m-%d-%y %H:%M:%S") + "*********")
 	for x in zoneArray:
 		outfile.write(str(x))
 
 	outfile.close()
+	print "wrote snapshot and closed file"
 
 	
 
@@ -172,10 +182,10 @@ if __name__ == '__main__':
 			saveSetfileSnapshot(snapshotfile, zoneArray)
 			sendModifiedParameters(zoneArray)
 			lastmod = mtime
-			time.sleep(0.3)
+			time.sleep(timeSpacing)
 
 		logTemperatures(templogfile)
-		time.sleep(0.3)
+		time.sleep(timeSpacing)
 
 	
 

@@ -8,9 +8,20 @@ import subprocess
 global usrFile
 usrFile = "../../user"
 
+global timeSpacing
+timeSpacing = 1.0	#seconds to wait between commands to Omega
+
+global timeOut
+timeOut = 4.0		#seconds to wait for timeout of commands
 
 def getUserFileDirectory():
 	return usrFile
+
+def getTimeSpacing():
+	return timeSpacing
+
+def getTimeOut():
+	return timeOut
 
 
 
@@ -23,7 +34,7 @@ class ControlZone:
 		self.ha = h 				#alarm at "high alarm", 'ha' degrees above setpoint
 		self.la = l 				#alarm at "low alarm", 'la' degrees below setpoint
 		self.changed = False		#marks if the zone has recently had a changed parameter, 0 for false 1 for true
-		self.enableChanged = False
+		self.enableChanged = True
 
 	def printZone(self):
 		print "-----------------------"
@@ -47,15 +58,22 @@ class ControlZone:
 	def sendParameters(self):
 
 		print "deciding to send regular parameters on zone " + str(self.zone)
-		#send setpoint
-		val = subprocess.call([usrFile + "/ssp.py", str(self.zone), str(self.setpoint)] )
-		time.sleep(0.3)
-		#send high alarm
-		val = subprocess.call([usrFile + "/sha.py", str(self.zone), str(self.ha)] )
-		time.sleep(0.3)
-		#send low alarm
-		val = subprocess.call([usrFile + "/sla.py", str(self.zone),str(self.la)] )
-		time.sleep(0.3)
+
+		try:
+			#send setpoint
+			val = subprocess.call([usrFile + "/ssp.py", str(self.zone), str(self.setpoint)], timeout = timeOut )
+			time.sleep(timeSpacing)
+			#send high alarm
+			val = subprocess.call([usrFile + "/sha.py", str(self.zone), str(self.ha)], timeout = timeOut)
+			time.sleep(timeSpacing)
+			#send low alarm
+			val = subprocess.call([usrFile + "/sla.py", str(self.zone),str(self.la)], timeout = timeOut)
+			time.sleep(timeSpacing)
+		except subprocess.TimeoutExpired:
+			print "CALL() timed out, trying again"
+			time.sleep(timeSpacing)
+			self.sendParameters()
+
 		print "SENT NEW PARAMETERS on zone " + str(self.zone)
 		self.changed = False
 
@@ -103,8 +121,14 @@ class ControlZone:
 		return self.enableChanged
 
 	def getZoneTemp(self):
-		process = subprocess.Popen([usrFile + '/rtm.py', str(self.zone)],stdin=subprocess.PIPE, stdout=subprocess.PIPE )
-		out, err = process.communicate()
+		try:
+			process = subprocess.Popen([usrFile + '/rtm.py', str(self.zone)],stdin=subprocess.PIPE, stdout=subprocess.PIPE )
+			out, err = process.communicate(timeout=timeOut)
+		except subprocess.TimeoutExpired:
+			print "Popen() timed out, trying again"
+			process.kill()
+			self.getZoneTemp()
+
 		return out.split('\n')[0]
 	
 

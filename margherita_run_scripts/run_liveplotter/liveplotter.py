@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import time
 import matplotlib.dates as mdates
 from matplotlib.dates import DateFormatter
-from datetime import datetime
+from datetime import datetime, timedelta
 from subprocess import call
 import csv
 
@@ -102,19 +102,22 @@ usecols=list(range(len(templabels_array[0,:]))), invalid_raise = False )
 		pressstime = np.array([(datetime.strptime(pdate[i], "%m-%d-%y %H:%M:%S")) for i in range(len(pdate))])
 		temptime = np.array([(datetime.strptime(tdate[i], "%m-%d-%y %H:%M:%S")) for i in range(len(tdate))])
 		controltime = np.array([(datetime.strptime(cdate[i], "%m-%d-%y %H:%M:%S")) for i in range(len(cdate))])
-		
+		NOWTime = datetime.now()
+		threeHourInterval = timedelta(hours=3)
+		THENTime = NOWTime - threeHourInterval
 		pfmts = ['r', 'k']
-		zone1 = [20,17,9,5,6]	#a5, a6, b6, b8
-		zone2 = [2,7]		#a2, b5
-		zone4 = [14,13,19,12,18]	#b1, b2, b10, b11
-		zone5 = [10,4,3,11,8]	#a3, a4, b9, b13, b7
-		zone6 = [1,0,15]	#a0, a1, b3
-		zone_marg = [16,21,22,23,24,25,26,27,28]
-		QE = [21]
+		zone1 = [19,16,9,5,6]	
+		zone2 = [2,7,3]
+		zone3 = [18,17]
+		zone4 = [13,12]	
+		zone5 = [10,4,11,8]	
+		zone6 = [1,0,14]
+		zone_marg = [15,20,21,22,23,24,25,26,27]
+		QE = [28]
 		tfmts = ['g','b','y','m','c','k','r','go','bo']
 	#	tlabels = ['a0','a1','a2','a3','a4','a5','a6','b5','b6','b7','b8','b9','b13','pump','b1','b2','b3','m1','b10','b11','m2','m3','m4','m5','m6','m7','m8','m9']
 		plabels = ['Margherita', 'Manifold']
-		controlL = ['Z1T2','Z2T2','zone 3 off','Z4T6','Z5T4','Z6T4']
+		controlL = ['Z1T2','Z2T2','Z3T3','Z4T1','Z5T4','Z6T4']
 
 		fmtcount = 0 #counts the number of fmt's we have iterated through
 		#plot zone 1
@@ -126,8 +129,9 @@ usecols=list(range(len(templabels_array[0,:]))), invalid_raise = False )
 		yticks(arange(20.0, 300.0, 20))
 		xticks(rotation=70)
 		plt.gcf().axes[0].xaxis.set_major_formatter(formatter)
-		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
 		gca().yaxis.set_ticks_position("right")
+		xlim([THENTime,NOWTime]) 
 		grid(b=True, which='major', color='pink', linestyle='--')
 		xlabel('timestamp')
 		ylim([0, 300])
@@ -146,31 +150,52 @@ usecols=list(range(len(templabels_array[0,:]))), invalid_raise = False )
 		yticks(arange(20.0, 300.0, 20))
 		xticks(rotation=70)
 		plt.gcf().axes[1].xaxis.set_major_formatter(formatter)
-		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
 		gca().yaxis.set_ticks_position("right")
 		grid(b=True, which='major', color='pink', linestyle='--')
 		xlabel('timestamp')
+		xlim([THENTime,NOWTime]) 
 		ylim([0, 300])
 		title('Zone 2, Sniffer Line')
 		ylabel('temperature (C)')
 		legend(loc=3)
 
+		fmtcount = 0
+		#plot zone 3
+		figure(1, figsize=(19,20))
+		subplot(523)
+		for i in zone3:
+			plot(temptime, tempstructure[:,i], tfmts[fmtcount], label=L[i],markevery=50)
+			fmtcount += 1
+		yticks(arange(20.0,300.0,20))
+		xticks(rotation = 70)
+		plt.gcf().axes[1].xaxis.set_major_formatter(formatter)
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
+		gca().yaxis.set_ticks_position("right")
+		grid(b=True, which='major',color='pink',linestyle='--')
+		xlabel('timestamp')
+		xlim([THENTime,NOWTime])
+		ylim([0,300])
+		title('Zone 3, RGA')
+		ylabel('temperature (C)')
+		legend(loc=3)
 
 		fmtcount = 0 #counts the number of fmt's we have iterated through
 		#plot zone 4
 		figure(1, figsize=(19,20))
-		subplot(523)
+		subplot(524)
 		for i in zone4:
 			plot(temptime, tempstructure[:,i], tfmts[fmtcount], label=L[i],markevery=50)
 			fmtcount+=1
 		yticks(arange(20.0, 300.0, 20))
 		xticks(rotation=70)
 		plt.gcf().axes[2].xaxis.set_major_formatter(formatter)
-		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
 		gca().yaxis.set_ticks_position("right")
 		grid(b=True, which='major', color='pink', linestyle='--')
 		xlabel('timestamp')
 		ylim([0, 300])
+		xlim([THENTime,NOWTime]) 
 		title('Zone 4, Pump Manifold')
 		ylabel('temperature (C)')
 		legend(loc=3)
@@ -179,18 +204,19 @@ usecols=list(range(len(templabels_array[0,:]))), invalid_raise = False )
 		fmtcount = 0 #counts the number of fmt's we have iterated through
 		#plot zone 5
 		figure(1, figsize=(19,20))
-		subplot(524)
+		subplot(525)
 		for i in zone5:
 			plot(temptime, tempstructure[:,i], tfmts[fmtcount], label=L[i],markevery=50)
 			fmtcount+=1
 		yticks(arange(20.0, 300.0, 20))
 		xticks(rotation=70)
 		plt.gcf().axes[3].xaxis.set_major_formatter(formatter)
-		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
 		gca().yaxis.set_ticks_position("right")
 		grid(b=True, which='major', color='pink', linestyle='--')
 		xlabel('timestamp')
 		ylim([0, 300])
+		xlim([THENTime,NOWTime]) 
 		title('Zone 5, Cs Upstream')
 		ylabel('temperature (C)')
 		legend(loc=3)
@@ -199,18 +225,19 @@ usecols=list(range(len(templabels_array[0,:]))), invalid_raise = False )
 		fmtcount = 0 #counts the number of fmt's we have iterated through
 		#plot zone 6
 		figure(1, figsize=(19,20))
-		subplot(525)
+		subplot(526)
 		for i in zone6:
 			plot(temptime, tempstructure[:,i], tfmts[fmtcount], label=L[i],markevery=50)
 			fmtcount+=1
 		yticks(arange(20.0, 300.0, 20))
 		xticks(rotation=70)
 		plt.gcf().axes[4].xaxis.set_major_formatter(formatter)
-		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
 		gca().yaxis.set_ticks_position("right")
 		grid(b=True, which='major', color='pink', linestyle='--')
 		xlabel('timestamp')
 		ylim([0, 300])
+		xlim([THENTime,NOWTime]) 
 		title('Zone 6, Cs Downstream')
 		ylabel('temperature (C)')
 		legend(loc=3)
@@ -218,72 +245,77 @@ usecols=list(range(len(templabels_array[0,:]))), invalid_raise = False )
 		fmtcount = 0
 		#plot marg
 		figure(1, figsize=(19,20))
-		subplot(526)
+		subplot(527)
 		for i in zone_marg:	
 			plot(temptime, tempstructure[:,i], tfmts[fmtcount], label=L[i], markevery=50)
 			fmtcount+=1
 		yticks(arange(20.0, 300.0, 20))
 		xticks(rotation=70)
 		plt.gcf().axes[5].xaxis.set_major_formatter(formatter)
-		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
 		gca().yaxis.set_ticks_position("right")
 		grid(b=True, which='major', color='pink', linestyle='--')
 		xlabel('timestamp')
 		ylim([0, 200])
+		xlim([THENTime,NOWTime]) 
 		title('Marg')
 		ylabel('temperature (C)')
 		legend(loc=3)
 
 
-	#	fmtcount = 0
-	#	#plot control 
-	#	figure(1, figsize=(19,20))
-	#	subplot(527)
-	#	for i in range(6): #6 control zones
-	#		plot(controltime, C[i], tfmts[fmtcount], label=controlL[i])
-	#		fmtcount+=1
-	#	yticks(arange(20.0, 300.0, 20))
-	#	xticks(rotation=70)
-	#	plt.gcf().axes[6].xaxis.set_major_formatter(formatter)
-	#	gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
-	#	gca().yaxis.set_ticks_position("right")
-	#	grid(b=True, which='major', color='pink', linestyle='--')
-	#	xlabel('timestamp')
-	#	ylim([0, 200])
-	#	title('Control TC')
-	#	ylabel('temperature (C)')
-	#	legend(loc=3)
+		fmtcount = 0
+		#plot control 
+		figure(1, figsize=(19,20))
+		subplot(528)
+		for i in range(6): #6 control zones
+			plot(controltime, C[i], tfmts[fmtcount], label=controlL[i])
+			fmtcount+=1
+		yticks(arange(20.0, 300.0, 20))
+		xticks(rotation=70)
+		plt.gcf().axes[6].xaxis.set_major_formatter(formatter)
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
+		gca().yaxis.set_ticks_position("right")
+		grid(b=True, which='major', color='pink', linestyle='--')
+		xlabel('timestamp')
+		ylim([0, 250])
+		xlim([THENTime,NOWTime]) 
+		title('Control TC')
+		ylabel('temperature (C)')
+		legend(loc=3)
 
-	#	fmtcount = 0
+		fmtcount = 0
 		#plot QE
-	#	figure (1, figsize = (19,20))
-	#	subplot(528)
-	#	for i in QE:
-	#		plot(temptime, tempstructure[:,i], tfmts[fmtcount], markevery = 50)
-	#		fmtcount += 1
-	#	yticks(arange(0.0, 300, 20))
-	#	xticks(rotation=70)
-	#	plt.gcf().axes[7].xaxis.set_major_formatter(formatter)
-	#	gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=30))
-	#	gca().yaxis.set_ticks_position("right")
-	#	grid(b=True, which = 'major', color = 'pink', linestyle = '--')
-	#	xlabel('timestamp')
-	#	ylabel('voltage')
-	#	title('QE voltage')
+		figure (1, figsize = (19,20))
+		subplot(529)
+		for i in QE:
+			plot(temptime, tempstructure[:,i], tfmts[fmtcount], markevery = 50)
+			fmtcount += 1
+		yticks(arange(0.0, 300, 20))
+		xticks(rotation=70)
+		plt.gcf().axes[7].xaxis.set_major_formatter(formatter)
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
+		gca().yaxis.set_ticks_position("right")
+		grid(b=True, which = 'major', color = 'pink', linestyle = '--')
+		xlabel('timestamp')
+		ylabel('voltage')
+		title('QE voltage')
+		xlim([THENTime,NOWTime]) 
 		#plot pressure
-		#figure(1, figsize =(19,20))
-		#subplot(427)
-		#yscale('log')
-		#xlabel('time')
-		#ylabel('pressure (torr)')
-		#grid(b=True, which='major', color='b', linestyle='-')
-		#grid(b=True, which='minor', color='black', linestyle='--')
+		figure(1, figsize =(19,20))
+		subplot(5,2,10)
+		yscale('log')
+		xlabel('time')
+		ylabel('pressure (torr)')
+		grid(b=True, which='major', color='b', linestyle='-')
+		grid(b=True, which='minor', color='black', linestyle='--')
 		#for i in range(len(P)):
-			#plot(pressstime, P[i], pfmts[i], label=plabels[i])
-		#legend(loc=3)	
-		#xticks(rotation=70)
-		#title("Pressures")
-		#gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
+		#	plot(pressstime, P[i], pfmts[i], label=plabels[i])
+		#plot only the second column
+		plot(pressstime,P[1], pfmts[1], label=plabels[1])
+		legend(loc=3)	
+		xticks(rotation=70)
+		title("Pressures")
+		gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=15))
 		
 		plt.tight_layout()
 
