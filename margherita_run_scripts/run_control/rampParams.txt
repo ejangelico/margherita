@@ -1,0 +1,7 @@
+<zone>,<ramp or no ramp>,<endpoint>,<temp interval>,<time interval (mins)>
+1,1,100,1,0.02
+2,1,272,2,0.05
+3,1,135,2,0.05
+4,1,135,1,0.05
+5,1,240,2,0.05
+6,1,165,3,0.05
