@@ -25,7 +25,7 @@ for scanfile in filelist:
 
 	#this is the half pullsed rga scan
 	if(scanfile == filelist[-1]): break	
-
+	print scanfile
 	scan=np.genfromtxt(scanfile,delimiter=',',dtype=None, invalid_raise=False)
 	plt.figure(figsize=(19,20))
 	plt.semilogy(scan[:,0], scan[:,1])
@@ -33,7 +33,7 @@ for scanfile in filelist:
 	plt.minorticks_on()
 	plt.xlabel('M/Q (amu/e)')
 	plt.ylabel('P (mbar)')
-	plt.ylim((2e-11,2e-6))
+	plt.ylim((2e-11,2e-5))
 	thedate=re.findall('\d\d',scanfile)
 	plt.title('RGA scan from {3}:{4}:{5} {0}/{1}/{2}'.format(*thedate))
 	plotname='/local/data2/margherita/data/rga_data/plots/'+scanfile[-16:-4]+'.png'
