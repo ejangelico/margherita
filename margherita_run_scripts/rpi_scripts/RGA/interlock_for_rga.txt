@@ -1,0 +1,1 @@
+To stop continuous scanning processes by the RGA, delete this file.

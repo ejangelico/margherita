@@ -1,4 +1,5 @@
 #Usage: python rampzones.py <rampParamsFile>.txt"
+#rampdown.py can only ramp down. Use rampup.py to ramp up.
 import sys
 import time
 import os
@@ -102,12 +103,12 @@ def applyChanges(zoneArray, setfile):
 
 		#if the zone is enabled, 
 		#and if the time has passed and we are ready for a change
-		#this line limits us to ONLY do temperature ramp-ups and not downs
+		#this line limits us to ONLY do temperature ramp-downs and not ups
 		if(zoneArray[i].getRampEnable() and (time.time() - zoneArray[i].getLastChange()) >= zoneArray[i].getTimestep()):
 			#disable the zone if you have reached the setpoint
 			curSetPt = int(splitLinesArray[i][2])
 			increment = zoneArray[i].getdT()
-			if((curSetPt + increment) > zoneArray[i].getEndTemp()):
+			if((curSetPt + increment) < zoneArray[i].getEndTemp()):
 				zoneArray[i].setRampEnable(False)
 				print "Zone " + str(zoneArray[i].getZone()) + " is DONE ramping"
 

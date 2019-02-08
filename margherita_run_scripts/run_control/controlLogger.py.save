@@ -58,8 +58,7 @@ def logTemperatures(templogfile, omegabox):
 	for i in range(len(output)):
 	    if(output[i] == '' or output[i] == '9999'):
 		output[i] = 20
-
-	print output	
+	
 	
 	#adjust the logged temperature given 
 	#a set of calibration offsets from the 

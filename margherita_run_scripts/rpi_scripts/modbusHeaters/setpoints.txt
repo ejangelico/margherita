@@ -1,0 +1,3 @@
+#heater,on/off,voltage-set,current-set
+uppper,0,4.41,0.49
+lower,0,2.22,0.25

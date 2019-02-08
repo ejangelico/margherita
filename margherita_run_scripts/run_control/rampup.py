@@ -1,4 +1,5 @@
 #Usage: python rampzones.py <rampParamsFile>.txt"
+#rampup.py can only ramp up. Use rampdown.py to ramp down.
 import sys
 import time
 import os

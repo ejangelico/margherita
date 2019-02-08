@@ -1,0 +1,115 @@
+import serial
+import time
+import struct
+
+class RGA(object): # one RGA object corresponds to one real RGA
+	def __init__(self, portname='/dev/ttyUSB0', baudrateset=28800, mytimeout=1, responsetime=0.5, start_mz=1, end_mz=90, points_per_amu=25, scan_speed=1,
+ t_pressure_sensitivity=2.72e-5,p_pressure_sensitivity=1.833e-4):
+		# portname is the USB port you should have plugged into
+		#baudrateset is the baudrate the RGA needs to use; don't change this param
+		#responsetime is how long I want to wait for responses on stuff the RGA should be able to do right away, without taking
+		#any measurements
+		self.responsetime=responsetime
+		self.portname=portname
+		self.baudrate=baudrateset
+		self.port=serial.Serial(self.portname,baudrate=self.baudrate, timeout=mytimeout)# open a channel on the serial port
+		#timeout needed, bad syntax I think
+		self.start_mz = start_mz # starting mass in analog scan
+		self.end_mz = end_mz # finishing mass in analog scan
+		self.points_per_amu = points_per_amu # points per amu of m/z in analog scan
+		self.scan_speed = scan_speed # scan speed in analog scan
+		self.t_pressure_sensitivity = t_pressure_sensitivity # convert ion current to total pressure, in A/torr
+		self.p_pressure_sensitivity = p_pressure_sensitivity # convert ion current to partial pressure, eg for analog scan, in A/torr
+		self.IDCheck()
+		self.CheckFilament(0.0000) # this is magic, needs a formatter from float to RGA-speak
+		self.WriteParams()
+		self.CheckParams()
+
+	def IDCheck(self,expected_id='SRSRGA200VER0.24SN15754'): # this function checks that the RGA identifies itself when prompted
+		print 'Querying RGA ID'
+		self.port.write('id?\r')# command RGA to identify itself
+		time.sleep(self.responsetime)#this is a hack so that we read the response to the command we sent, not the previous command
+		self.lastmessage=self.port.read(25) # length of RGA identity
+		print self.lastmessage
+		assert self.lastmessage==expected_id + '\n\r' # SRSRGA200VER0 is model number. 24SN15754 is serial number
+	def CheckFilament(self,expected_value):# this function checks that the filament current is what you think it should be	
+		#filament check
+		self.port.write('fl?\r') # ask filament current, should be 0.000
+		time.sleep(self.responsetime) # wait for reply
+		self.lastmessage = self.port.read(len('{:.4f}\n\r'.format(expected_value))) # expected reply is '0.000\r' which is 6 characters
+		print repr(self.lastmessage)
+		if self.lastmessage== '{:.4f}\n\r'.format(expected_value):
+			print 'The ionizing filament current is %s' % self.lastmessage
+		else:
+			self.port.write('fl0.0\r')
+			raise Exception('The filament should have been %s but replied instead: %r' % (expected_value, self.lastmessage))
+
+	def Ignite(self):
+		# this function turns on the filament on purpose
+		self.CheckFilament(0.000) # checks that the filament was off beforehand
+		self.port.write('fl*\r') # ignite filament at default value
+		time.sleep(6.0) # ignition takes 5 seconds, wait for completion
+		self.lastmessage=self.port.read(3) # if successful, RGA will send '1\n\r'
+		assert self.lastmessage == '1\n\r'
+		self.CheckFilament(.9976) # checks that filament is on now
+
+	def Extinguish(self):
+		self.port.write('fl0.0\r')
+		time.sleep(1)
+		self.lastmessage=self.port.read(3)
+		assert self.lastmessage == '1\n\r'
+		self.CheckFilament(0.000)
+
+	def CheckParams(self):# this function checks that the RGA's scan parameters are the same as your scan parameters
+		self.port.write('mi?\r')
+		self.port.write('mf?\r')
+		self.port.write('sa?\r')
+		self.port.write('nf?\r')
+		self.port.write('ap?\r')
+		time.sleep(self.responsetime)
+
+		self.lastmessage = self.port.read(2+len('%s' % self.start_mz))
+		print repr(self.lastmessage)
+		assert self.lastmessage == '%s\n\r' % self.start_mz
+		self.lastmessage = self.port.read(2+len('%s' % self.end_mz))
+		print repr(self.lastmessage)
+		assert self.lastmessage == '%s\n\r' % self.end_mz
+		self.lastmessage = self.port.read(4)
+		print repr(self.lastmessage)
+		assert self.lastmessage == '%s\n\r' % self.points_per_amu
+		self.lastmessage = self.port.read(3)
+		print repr(self.lastmessage)
+		assert self.lastmessage == '%s\n\r' % (self.scan_speed - 1)
+		self.lastmessage = self.port.read(len('%s\n\r' % ((self.end_mz - self.start_mz)*self.points_per_amu + 1)))
+		print repr(self.lastmessage)
+		assert self.lastmessage == '%s\n\r' % ((self.end_mz - self.start_mz)*self.points_per_amu + 1)
+
+	def WriteParams(self):# this function writes your parameters to the RGA's internal storage
+		self.port.write('mi%s\r' % self.start_mz)
+		self.port.write('mf%s\r' % self.end_mz)
+		self.port.write('sa%s\r' % self.points_per_amu)
+		self.port.write('nf%s\r' % (self.scan_speed - 1))
+
+	def analogscan(self):# this function performs an analog scan
+		self.WriteParams()
+		self.CheckParams()
+		ap = (self.end_mz - self.start_mz) * self.points_per_amu + 1
+		masses=[self.start_mz + float(i)/self.points_per_amu for i in range(ap)]
+		print repr(ap)
+		self.port.write('sc1\r')
+		time.sleep(4.0*(self.end_mz-self.start_mz)*float(2)**(-float(self.scan_speed))) # this is a hack, time the RGA yourself today
+		file = open('./data/RGA{}.txt'.format(time.strftime('%y%m%d%H%M%S')),'a')
+		
+		time.sleep(20)
+		self.lastmessage=self.port.read(ap*4)
+		for i in range(ap):
+			file.write(str(masses[i]) + ',' +
+				str(struct.unpack('<I',self.lastmessage[4*i:4*i+4])[0]*1e-16 / self.p_pressure_sensitivity) +
+				'\n')
+		self.lastmessage = self.port.read(4)
+		print repr(self.lastmessage)
+		file.write(str(struct.unpack('<I',self.lastmessage)[0] * 1e-16 / self.t_pressure_sensitivity))
+		file.close()
+		self.lastmessage = self.port.read()	
+		assert self.lastmessage == '' 
+		print 'Measurement complete.'
